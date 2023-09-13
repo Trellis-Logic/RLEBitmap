@@ -23,8 +23,9 @@
 //
 
 
-#include <Windows.h>
 #include <stdint.h>
+#include <cstddef>
+#include <cstring>
 #include "CBitmapHandler.h"
 
 
@@ -173,7 +174,7 @@ C8BitBitmapHandler::C8BitBitmapHandler(
 	const uint8_t *pPixelData,
 	uint16_t xSize,
 	uint16_t ySize,
-	const byte *pPaletteData)
+	const uint8_t *pPaletteData)
 	: m_pPixelData(pPixelData), CBitmapHandler(xSize, ySize), m_pPaletteData(pPaletteData)
 {
 
@@ -193,10 +194,10 @@ C8BitBitmapHandler::GetPixelColor(
 
 	const uint8_t *pPixel = pLineStart + x;
 
-	byte bitmapPaletteIndex = *pPixel;
+	uint8_t bitmapPaletteIndex = *pPixel;
 
 	//  Palette entries are BGRA.  Ignore alpha!
-	const byte *pPaletteEntry = m_pPaletteData + 4 * bitmapPaletteIndex;
+	const uint8_t *pPaletteEntry = m_pPaletteData + 4 * bitmapPaletteIndex;
 	uint8_t Blue = *pPaletteEntry++;
 	uint8_t Green = *pPaletteEntry++;
 	uint8_t Red = *pPaletteEntry++;
